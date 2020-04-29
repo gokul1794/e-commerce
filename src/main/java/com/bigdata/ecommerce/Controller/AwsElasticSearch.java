@@ -6,7 +6,6 @@ import com.bigdata.ecommerce.Repository.ProductRepository;
 import com.bigdata.ecommerce.Service.StorageService;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
-import com.google.gson.Gson;
 import com.squareup.okhttp.MediaType;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
