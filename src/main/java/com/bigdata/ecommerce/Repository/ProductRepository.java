@@ -9,4 +9,5 @@ import java.util.List;
 @EnableScan
 public interface ProductRepository extends CrudRepository<Product, String> {
     List<Product> findByProductId(String id);
+    List<Product> findByCategory(String category);
 }

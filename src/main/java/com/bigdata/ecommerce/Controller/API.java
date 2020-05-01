@@ -5,8 +5,8 @@ import com.amazonaws.AmazonServiceException;
 import com.bigdata.ecommerce.Models.Constants;
 import com.bigdata.ecommerce.Models.Manufacturer;
 import com.bigdata.ecommerce.Models.Product;
-import com.bigdata.ecommerce.Repository.ProductRepository;
 
+import com.bigdata.ecommerce.Service.ProductService;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,16 +18,13 @@ import org.springframework.web.server.ResponseStatusException;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @RestController
 public class API {
 
     @Autowired
-    ProductRepository productService;
+    ProductService productService;
 
     /**
      * Gets All Products
@@ -36,6 +33,20 @@ public class API {
     @GetMapping("/getProducts")
     public Iterable<Product> product() {
         Iterable<Product> products = productService.findAll();
+        return products;
+    }
+
+    //Get product Categories
+    @GetMapping("/getProductCategories")
+    public Set<String> getCategories(){
+        Set<String> categories = productService.getCategories();
+        return categories;
+    }
+
+    //Get All Products by category name
+    @RequestMapping(value = "/getProductByCategory/{category}", method = RequestMethod.GET)
+    public List<Product> getProductsByCategory(@PathVariable String category){
+        List<Product> products = productService.getByCategory(category);
         return products;
     }
 
